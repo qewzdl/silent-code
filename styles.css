@@ -19,7 +19,6 @@ body {
     grid-template-rows: 1fr 4fr 1fr;
     background-color: var(--background-color);
     line-height: 1.5;
-    overflow: hidden;
 }
 
 header {
