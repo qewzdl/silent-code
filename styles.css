@@ -188,6 +188,7 @@ textarea {
 
 #github-logo {
     opacity: 0;
+    user-select: none;
 
     transition: opacity 0.3s ease-in-out;
 }
