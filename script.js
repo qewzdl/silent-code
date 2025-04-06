@@ -10,28 +10,41 @@ window.addEventListener("load", updateLineNumbers);
 function RemoveComments() {
     const code = codeInput.value;
 
-    let codeWithoutMultiLine = code.replace(/\/\*[\s\S]*?\*\//g, ''); 
+    let stringLiterals = [];
+    let codeWithPlaceholders = code.replace(/(["'`])(?:(?=(\\?))\2.)*?\1/g, function(match) {
+        let placeholder = `___STRING_LITERAL_${stringLiterals.length}___`;
+        stringLiterals.push(match);
+        return placeholder;
+    });
+
+    let codeWithoutMultiLine = codeWithPlaceholders.replace(/\/\*[\s\S]*?\*\//g, ''); 
 
     const lines = codeWithoutMultiLine.split('\n');
 
     const processedLines = lines.map(line => {
-        const trimmedLine = line.trim();
 
-        if (trimmedLine.startsWith('//')) {
-            return null;
-        }
+        const slashIndex = line.indexOf('//');
+        
+        if (slashIndex !== -1) {
 
-        const commentIndex = line.indexOf('//');
-        if (commentIndex !== -1) {
-            return line.substring(0, commentIndex).trimEnd();
+            const beforeSlash = slashIndex === 0 ? '' : line.charAt(slashIndex - 1);
+            if (beforeSlash === '' || beforeSlash === ' ' || beforeSlash === '\t') {
+                return line.substring(0, slashIndex).trimEnd();
+            }
         }
 
         return line;
     });
 
-    const finalCode = processedLines
+    let finalCode = processedLines
         .filter(line => line !== null)
         .join('\n');
+
+    finalCode = finalCode.replace(/\n\s*\n\s*\n+/g, '\n\n');
+
+    stringLiterals.forEach((str, index) => {
+        finalCode = finalCode.replace(`___STRING_LITERAL_${index}___`, str);
+    });
 
     codeInput.value = finalCode;
     

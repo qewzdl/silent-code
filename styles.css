@@ -45,6 +45,11 @@ main {
     justify-content: center;
 }
 
+.description {
+    font-style: italic;
+    font-size: 14px;
+}
+
 .code-editor {
     display: flex;
     height: 100%;
