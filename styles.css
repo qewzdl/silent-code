@@ -86,28 +86,6 @@ textarea {
     overflow-y: hidden;
 } 
 
-.sign, #github-link {
-    margin-bottom: 20px;
-}
-
-#github-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-align: start;
-    text-decoration: none;
-    padding: 4px 8px;
-    border-radius: 8px;
-    width: 50px;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, width 0.3s ease-in-out;
-}
-
-#github-link:hover {
-    background-color: var(--primary-color);
-    color: white;
-    width: 95px;
-}
-
 .header-content {
     margin-top: 10px;
 }
@@ -184,6 +162,38 @@ textarea {
     justify-content: center;
     align-items: center;
     gap: 32px;
+}
+
+.sign, #github-link {
+    margin-bottom: 20px;
+}
+
+#github-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: start;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 8px;
+    width: 50px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+#github-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+    width: 95px;
+}
+
+#github-logo {
+    opacity: 0;
+
+    transition: opacity 0.3s ease-in-out;
+}
+
+#github-link:hover #github-logo {
+    opacity: 1;
 }
 
 @media (max-width: 900px) {
